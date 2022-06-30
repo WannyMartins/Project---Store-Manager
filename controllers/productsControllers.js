@@ -17,16 +17,16 @@ async function getById(req, res) {
   return res.status(200).json(result[0]);
 }
 
-async function createProduct(req, res) {
-  const { name } = req.body;
+// async function createProduct(req, res) {
+//   const { name } = req.body;
 
-  const result = await ProductsServices.createProduct(name);
+//   const result = await ProductsServices.createProduct(name);
   
-return res.status(201).json(result);
-}
+// return res.status(201).json(result);
+// }
 
 module.exports = {
   getAll,
   getById,
-  createProduct,
+  // createProduct,
 };

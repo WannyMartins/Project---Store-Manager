@@ -1,9 +1,9 @@
 const ProductsModel = require('../models/productsModels');
 
-const isValid = (name) => {
-  if (!name || typeof name !== 'string') return false;
-  return true;
-};
+// const isValid = (name) => {
+//   if (!name || typeof name !== 'string') return false;
+//   return true;
+// };
 
 async function getAll() {
   const getProducts = await ProductsModel.getAll();
@@ -16,22 +16,22 @@ async function getAll() {
 async function getById(id) {
   const getProducts = await ProductsModel.getById(id);
 
-  if (getProducts.length === 0) return false;
+  if (!getProducts) return false;
 
   return getProducts;
 }
 
-async function createProduct(name) {
-  const isNameValid = isValid(name);
+// async function createProduct(name) {
+//   const isNameValid = isValid(name);
 
-  if (!isNameValid) return false;
+//   if (!isNameValid) return false;
 
-  const id = await ProductsModel.createProduct(name);
-  return { id, name };
-}
+//   const id = await ProductsModel.createProduct(name);
+//   return { id, name };
+// }
 
 module.exports = {
   getAll,
   getById,
-  createProduct,
+  // createProduct,
 };
