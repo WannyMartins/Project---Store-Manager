@@ -14,39 +14,72 @@ describe('ProductController', () => {
 
   describe('#getAll', () => {
 
-    const example = [
-      {
-        "id": 1,
-        "name": "Martelo de Thor",
-      },
-      {
-        "id": 2,
-        "name": "Traje de encolhimento",
-      }
-    ];
-
     describe('se há conteúdo', () => {
+      const example = [
+        {
+          "id": 1,
+          "name": "Martelo de Thor",
+        },
+        {
+          "id": 2,
+          "name": "Traje de encolhimento",
+        }
+      ];
+
+
       it('o status retorna correto', async () => {
+        sinon.stub(ProductService, 'getAll').resolves(example);
+        
         const req = {};
         const res = {};
+
         res.status = sinon.stub().returns(res);
-        res.json = sinon.stub().returns();
-        sinon.stub(ProductService, 'getAll').resolves(example);
+        res.json = sinon.stub();
+
         await ProductController.getAll(req, res);
         expect(res.status.calledWith(200)).to.be.equal(true);
       });
       it('o json retorna correto', async () => {
+        sinon.stub(ProductService, 'getAll').resolves(example);
+        
         const req = {};
         const res = {};
         res.status = sinon.stub().returns(res);
         res.json = sinon.stub().returns();
 
-        sinon.stub(ProductService, 'getAll').resolves(example);
         await ProductController.getAll(req, res);
         expect(res.json.calledWith(example)).to.be.equal(true);
 
       });
     });
+
+    describe('se não há conteúdo', () => {
+      it('o status retorna correto', async () => {
+        sinon.stub(ProductService, 'getAll').resolves([]);
+
+        const req = {};
+        const res = {};
+
+        res.status = sinon.stub().returns(res);
+        res.json = sinon.stub();
+
+        await ProductController.getAll(req, res);
+        expect(res.status.calledWith(404)).to.be.equal(true);
+      });
+      it('o json retorna correto', async () => {
+        sinon.stub(ProductService, 'getAll').resolves([]);
+
+        const req = {};
+        const res = {};
+        res.status = sinon.stub().returns(res);
+        res.json = sinon.stub();
+
+        await ProductController.getAll(req, res);
+        expect(res.json.calledWith({ message: 'Product not found' })).to.be.equal(true);
+
+      });
+    });
+
   });
   
   describe('#getById', () => {
@@ -57,7 +90,8 @@ describe('ProductController', () => {
         const req = {};
         const res = {};
         res.status = sinon.stub().returns(res);
-        res.json = sinon.stub().returns();
+        res.json = sinon.stub();
+
         req.params = {id: 1}
 
         sinon.stub(ProductService, 'getById').resolves([{ id: 1, name: "Martelo de Thor" }]);
@@ -84,9 +118,9 @@ describe('ProductController', () => {
         const res = {};
         res.status = sinon.stub().returns(res);
         res.json = sinon.stub().returns();
-        req.params = { id: "99999" }
+        req.params = { id: '99999' }
 
-        sinon.stub(ProductService, 'getById').resolves(false);
+        sinon.stub(ProductService, 'getById').resolves([]);
         await ProductController.getById(req, res);
         expect(res.status.calledWith(404)).to.be.equal(true);
       });
@@ -95,14 +129,71 @@ describe('ProductController', () => {
         const res = {};
         res.status = sinon.stub().returns(res);
         res.json = sinon.stub().returns();
-        req.params = { id: "9999" }
+        req.params = { id: "teste" }
 
-        sinon.stub(ProductService, 'getById').resolves(false);
+        sinon.stub(ProductService, 'getById').resolves([]);
         await ProductController.getById(req, res);
-        expect(res.json.calledWith({ message: 'Product not found' })).to.be.equals(true);
+        expect(res.json.calledWith({"message": "Product not found"})).to.be.deep.equal(true);
       });
 
     });
 
   });
+
+  describe('#create', () => {
+
+    describe('se informar o name válido', () => {
+      it('o status retorna correto', async () => {
+        const req = {};
+        const res = {};
+
+        res.status = sinon.stub().returns(res);
+        res.json = sinon.stub();
+
+        req.body = {name: 'teste'}
+
+        sinon.stub(ProductService, 'create').resolves(3);
+
+        await ProductController.create(req, res);
+
+        expect(res.status.calledWith(201)).to.be.equal(true);
+      });
+
+      describe('se informar o name inválido', () => {
+        it('o status retorna correto', async () => {
+          const req = {};
+          const res = {};
+
+          res.status = sinon.stub().returns(res);
+          res.json = sinon.stub();
+
+          req.body = { name: 'test' }
+
+          sinon.stub(ProductService, 'create').resolves(3);
+
+          await ProductController.create(req, res);
+
+          expect(res.status.calledWith(422)).to.be.equal(true);
+        });
+        it('o status retorna correto', async () => {
+          const req = {};
+          const res = {};
+
+          res.status = sinon.stub().returns(res);
+          res.json = sinon.stub();
+
+          req.body = { name: '' }
+
+          sinon.stub(ProductService, 'create').resolves(3);
+
+          await ProductController.create(req, res);
+
+          expect(res.status.calledWith(400)).to.be.equal(true);
+        });
+
+      });
+
+    });
+  });
+
 });

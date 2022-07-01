@@ -50,20 +50,6 @@ describe('ProductService', () => {
     });
     
     });
-    describe('se o resultado é vazio', () => {
-      
-      it('retorno boolean', async () => {
-        sinon.stub(ProductModel, 'getAll').resolves([]);
-        const response = await ProductService.getAll();
-        expect(response).to.be.a('boolean');
-      });
-
-      it('retorna false', async () => {
-        sinon.stub(ProductModel, 'getAll').resolves([]);
-        const response = await ProductService.getAll();
-        expect(response).to.be.equal(false);
-      });
-    });
   });
 
 
@@ -109,8 +95,16 @@ describe('ProductService', () => {
     });
       
 
-    });
-    });
+  });
 
+  describe('#create', () => {
 
+      it('informando uma objeto válido', async () => {
+        sinon.stub(ProductModel, 'create').resolves(3);
+        const response = await ProductService.create({name: 'teste'});
+        expect(response).to.be.deep.equal({ id: 3, name: 'teste' });
+      });
 
+  });
+
+});
