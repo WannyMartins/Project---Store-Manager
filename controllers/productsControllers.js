@@ -30,6 +30,32 @@ const ProductsControllers = {
     return res.status(201).json(result);
   },
 
+  update: async (req, res) => {
+    const { id } = req.params;
+    const { name } = req.body;
+    if (!name) return res.status(400).json({ message: '"name" is required' });
+    if (name.length < 5) {
+      return res.status(422)
+      .json({ message: '"name" length must be at least 5 characters long' });
+    }
+    const updateServices = await ProductsServices.update(id, name);
+
+    if (!updateServices) {
+      return res.status(404).json({ message: 'Product not found' });
+    }
+    return res.status(200).json(updateServices);
+  },
+
+  delete: async (req, res) => {
+    const { id } = req.params;
+    const product = await ProductsServices.delete(id);
+    if (!product) {
+      return res.status(404).json({ message: 'Product not found' });
+    }
+
+    return res.sendStatus(204);
+  },
+
 };
 
 module.exports = ProductsControllers;

@@ -17,5 +17,22 @@ const ProductsServices = {
     const id = await ProductsModel.create({ name });
     return { id, name };
   },
+
+  update: async (id, name) => {
+    const updatemodel = await ProductsModel.update(id, name);
+
+    if (updatemodel === 0) return false;
+    return { id, name };
+  },
+
+  delete: async (id) => {
+    const updatemodel = await ProductsModel.delete(id);
+
+    if (updatemodel === 0) {
+      return false;
+    }
+    return { id };
+  },
+
 };
 module.exports = ProductsServices;

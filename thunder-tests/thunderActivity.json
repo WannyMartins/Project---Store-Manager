@@ -8,7 +8,7 @@
     "method": "GET",
     "sortNum": 0,
     "created": "2022-06-29T19:07:23.619Z",
-    "modified": "2022-07-01T22:32:15.070Z",
+    "modified": "2022-07-02T23:05:23.032Z",
     "headers": [],
     "params": [],
     "body": {
@@ -23,11 +23,11 @@
     "colId": "history",
     "containerId": "",
     "name": "localhost:3000/products/1",
-    "url": "localhost:3000/products/teste",
+    "url": "localhost:3000/products",
     "method": "GET",
     "sortNum": 0,
     "created": "2022-06-29T19:16:00.065Z",
-    "modified": "2022-07-01T22:39:24.573Z",
+    "modified": "2022-07-01T23:59:14.710Z",
     "headers": [],
     "params": [],
     "tests": []
@@ -41,12 +41,12 @@
     "method": "POST",
     "sortNum": 0,
     "created": "2022-06-30T21:01:50.483Z",
-    "modified": "2022-07-01T23:04:13.656Z",
+    "modified": "2022-07-02T22:39:36.450Z",
     "headers": [],
     "params": [],
     "body": {
       "type": "json",
-      "raw": "{\n    \"name\": \"kjbh\"\n}",
+      "raw": "{\n    \"name\": \"kjbbbh\"\n}",
       "form": []
     },
     "tests": []
@@ -68,6 +68,53 @@
       "raw": "  [\n    {\n      \"productId\": 1,\n      \"quantity\":1\n    }\n  ]",
       "form": []
     },
+    "tests": []
+  },
+  {
+    "_id": "d89569da-c860-4f33-b882-560facd7ec0c",
+    "colId": "history",
+    "containerId": "",
+    "name": "localhost:3000/products/1",
+    "url": "localhost:3000/products/9999",
+    "method": "PUT",
+    "sortNum": 0,
+    "created": "2022-07-01T23:57:57.708Z",
+    "modified": "2022-07-02T23:19:19.370Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n    \"name\": \"novo nome\"\n}",
+      "form": []
+    },
+    "tests": []
+  },
+  {
+    "_id": "415f131e-d6a2-4182-8bbc-0d43e5c08786",
+    "colId": "history",
+    "containerId": "",
+    "name": "localhost:3000/products/2",
+    "url": "localhost:3000/products/2",
+    "method": "DELETE",
+    "sortNum": 0,
+    "created": "2022-07-02T23:03:26.640Z",
+    "modified": "2022-07-02T23:05:02.014Z",
+    "headers": [],
+    "params": [],
+    "tests": []
+  },
+  {
+    "_id": "89703848-46dd-46b3-b0e8-1a20fa9704a8",
+    "colId": "history",
+    "containerId": "",
+    "name": "localhost:3000/products/3",
+    "url": "localhost:3000/products/3",
+    "method": "DELETE",
+    "sortNum": 0,
+    "created": "2022-07-02T23:05:18.949Z",
+    "modified": "2022-07-02T23:05:27.250Z",
+    "headers": [],
+    "params": [],
     "tests": []
   }
 ]
