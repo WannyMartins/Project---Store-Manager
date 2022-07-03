@@ -36,5 +36,11 @@ const ProductsServices = {
     return { id };
   },
 
+  search: async (term) => {
+    const getProducts = await ProductsModel.search(`%${term}%`);
+
+    return getProducts;
+  },
+
 };
 module.exports = ProductsServices;
