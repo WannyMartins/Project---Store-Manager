@@ -95,5 +95,28 @@ describe('ProductModel', () => {
 
   });
 
+  describe('#search', () => {
+
+    const execute = [
+      {
+        "id": 1,
+        "name": "Martelo de Thor",
+      }
+    ];
+
+    it('retorna os produtos buscados com os termos', async () => {
+      sinon.stub(connection, "execute").resolves(execute);
+      const response = await ProductModel.search('Martelo');
+
+      expect(response).to.be.deep.equal({
+        "id": 1,
+        "name": "Martelo de Thor",
+      });
+    });
+
+  });
+
+
+
 
   })

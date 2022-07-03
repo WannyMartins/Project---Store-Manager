@@ -339,4 +339,29 @@ describe('ProductController', () => {
 
   });
 
+  describe('#search', () => {
+
+    describe('se informar um term válido', () => {
+      it('o status retorna correto', async () => {
+        const req = {};
+        const res = {};
+
+        res.status = sinon.stub().returns(res);
+        res.json = sinon.stub();
+
+        req.query = { q: 'Martelo' };
+
+        sinon.stub(ProductService, 'search').resolves({ id: 1, name: "Martelo de Thor" });
+
+        await ProductController.search(req, res);
+
+        expect(res.status.calledWith(200)).to.be.equal(true);
+      });
+
+    });
+
+  });
+
+
+
 });

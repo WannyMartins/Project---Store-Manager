@@ -8,7 +8,7 @@
     "method": "GET",
     "sortNum": 0,
     "created": "2022-06-29T19:07:23.619Z",
-    "modified": "2022-07-03T01:32:09.306Z",
+    "modified": "2022-07-03T03:09:25.471Z",
     "headers": [],
     "params": [],
     "body": {
@@ -115,6 +115,46 @@
     "modified": "2022-07-03T02:07:58.079Z",
     "headers": [],
     "params": [],
+    "tests": []
+  },
+  {
+    "_id": "cfc0e1a3-fc0a-4a4b-bf15-5c686d7b6efe",
+    "colId": "history",
+    "containerId": "",
+    "name": "localhost:3000/products/search?q=novo",
+    "url": "localhost:3000/products/search?q=novo",
+    "method": "GET",
+    "sortNum": 0,
+    "created": "2022-07-03T03:08:31.675Z",
+    "modified": "2022-07-03T03:08:59.581Z",
+    "headers": [],
+    "params": [
+      {
+        "name": "q",
+        "value": "novo",
+        "isPath": false
+      }
+    ],
+    "tests": []
+  },
+  {
+    "_id": "9f748739-b599-4edb-9c36-028258d1ea8c",
+    "colId": "history",
+    "containerId": "",
+    "name": "localhost:3000/products/search?q=Martelo",
+    "url": "localhost:3000/products/search?q=Martelo",
+    "method": "GET",
+    "sortNum": 0,
+    "created": "2022-07-03T03:09:36.538Z",
+    "modified": "2022-07-03T03:10:32.227Z",
+    "headers": [],
+    "params": [
+      {
+        "name": "q",
+        "value": "Martelo",
+        "isPath": false
+      }
+    ],
     "tests": []
   }
 ]

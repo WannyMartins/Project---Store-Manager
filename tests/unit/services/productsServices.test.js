@@ -161,6 +161,21 @@ describe('ProductService', () => {
 
   });
 
+  describe('#search', () => {
+
+    it('informando uma objeto válido', async () => {
+      sinon.stub(ProductModel, 'search').resolves({
+        "id": 1,
+        "name": "Martelo de Thor",
+      });
+      const response = await ProductService.search('Martelo');
+      expect(response).to.be.deep.equal({ id: 1, name: "Martelo de Thor" });
+    });
+
+  });
+
+
+
 
 
 });
