@@ -71,5 +71,29 @@ describe('ProductModel', () => {
         expect(response).to.be.equal(1);
       });
 
+  });
+  
+  describe('#update', () => {
+
+    it('retorna uma linha afetada', async () => {
+      sinon.stub(connection, "execute").resolves([{ affectedRows: 1 }]);
+      const response = await ProductModel.update(1, 'novo nome');
+
+      expect(response).to.be.equal(1);
     });
+
+  });
+
+  describe('#delete', () => {
+
+    it('retorna uma linha afetada', async () => {
+      sinon.stub(connection, "execute").resolves([{ affectedRows: 1 }]);
+      const response = await ProductModel.delete(1);
+
+      expect(response).to.be.equal(1);
+    });
+
+  });
+
+
   })

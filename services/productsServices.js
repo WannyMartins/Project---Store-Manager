@@ -19,18 +19,20 @@ const ProductsServices = {
   },
 
   update: async (id, name) => {
-    const updatemodel = await ProductsModel.update(id, name);
+    if (typeof id !== 'number') return false;
+    if (!name || name.length < 5) return false;
 
-    if (updatemodel === 0) return false;
+   const updateModel = await ProductsModel.update(Number(id), name);
+
+    if (!updateModel) return false;
     return { id, name };
   },
 
   delete: async (id) => {
-    const updatemodel = await ProductsModel.delete(id);
+    if (typeof id !== 'number' || id <= 0 || id === undefined) return false;
 
-    if (updatemodel === 0) {
-      return false;
-    }
+    const deleteModel = await ProductsModel.delete(Number(id));
+    if (!deleteModel) return false;
     return { id };
   },
 

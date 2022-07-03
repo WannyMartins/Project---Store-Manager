@@ -196,4 +196,147 @@ describe('ProductController', () => {
     });
   });
 
+  describe('#update', () => {
+
+    describe('se informar o name e id válido', () => {
+      it('o status retorna correto', async () => {
+        const req = {};
+        const res = {};
+
+        res.status = sinon.stub().returns(res);
+        res.json = sinon.stub();
+
+        req.body = { name: 'teste' };
+        req.params = { id: 1 }
+
+        sinon.stub(ProductService, 'update').resolves(1);
+
+        await ProductController.update(req, res);
+
+        expect(res.status.calledWith(200)).to.be.equal(true);
+      });
+
+    });
+
+    describe('se informar o name inválido', () => {
+      it('com nome menor que 5 caracteres o status retorna correto', async () => {
+        const req = {};
+        const res = {};
+
+        res.status = sinon.stub().returns(res);
+        res.json = sinon.stub();
+
+        req.body = { name: 'te' };
+        req.params = { id: 1 }
+
+        sinon.stub(ProductService, 'update').resolves(1);
+
+        await ProductController.update(req, res);
+
+        expect(res.status.calledWith(422)).to.be.equal(true);
+      });
+
+      it('com nome vazio o status retorna correto', async () => {
+        const req = {};
+        const res = {};
+
+        res.status = sinon.stub().returns(res);
+        res.json = sinon.stub();
+
+        req.body = { name: '' };
+        req.params = { id: 1 }
+
+        sinon.stub(ProductService, 'update').resolves(1);
+
+        await ProductController.update(req, res);
+
+        expect(res.status.calledWith(400)).to.be.equal(true);
+      });
+
+    });
+
+    describe('se informar o id inválido', () => {
+      it('o status retorna correto', async () => {
+        const req = {};
+        const res = {};
+
+        res.status = sinon.stub().returns(res);
+        res.json = sinon.stub();
+
+        req.body = { name: 'teste' };
+        req.params = { id: 'teste' }
+
+        sinon.stub(ProductService, 'update').resolves(false);
+
+        await ProductController.update(req, res);
+
+        expect(res.status.calledWith(404)).to.be.equal(true);
+      });
+
+    });
+
+
+  });
+  describe('#delete', () => {
+
+    describe('se informar o name e id válido', () => {
+      it('o status retorna correto', async () => {
+        const req = {};
+        const res = {};
+
+        res.sendStatus = sinon.stub().returns(res);
+        res.json = sinon.stub();
+
+        req.body = { name: 'teste' };
+        req.params = { id: 1 }
+
+        sinon.stub(ProductService, 'delete').resolves(1);
+
+        await ProductController.delete(req, res);
+
+        expect(res.sendStatus.calledWith(204)).to.be.equal(true);
+      });
+
+    });
+
+    describe('se informar o id inválido', () => {
+      it('com id invalidoo status retorna correto', async () => {
+        const req = {};
+        const res = {};
+
+        res.status = sinon.stub().returns(res);
+        res.json = sinon.stub();
+
+        req.body = { name: 'teste' };
+        req.params = { id: 'teste' }
+
+        sinon.stub(ProductService, 'delete').resolves(false);
+
+        await ProductController.delete(req, res);
+
+        expect(res.status.calledWith(404)).to.be.equal(true);
+      });
+
+      it('com id vazio o status retorna correto', async () => {
+        const req = {};
+        const res = {};
+
+        res.status = sinon.stub().returns(res);
+        res.json = sinon.stub();
+
+        req.body = { name: 'teste' };
+        req.params = { id: '' }
+
+        sinon.stub(ProductService, 'delete').resolves(false);
+
+        await ProductController.delete(req, res);
+
+        expect(res.status.calledWith(404)).to.be.equal(true);
+      });
+
+
+    });
+
+  });
+
 });

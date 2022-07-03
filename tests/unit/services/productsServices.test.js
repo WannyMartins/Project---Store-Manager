@@ -107,4 +107,60 @@ describe('ProductService', () => {
 
   });
 
+  describe('#update', () => {
+
+    it('informando um "id" e "name" válidos', async () => {
+      sinon.stub(ProductModel, 'update').resolves(1);
+      const response = await ProductService.update(1, 'novo nome');
+      expect(response).to.be.deep.equal({ id: 1, name: 'novo nome' });
+    });
+
+    it('informando um "id" inválido', async () => {
+      sinon.stub(ProductModel, 'update').resolves(0);
+      const response = await ProductService.update('teste', "novo teste");
+      expect(response).to.be.deep.equal(false);
+    });
+
+    it('informando um "name" inválido', async () => {
+      sinon.stub(ProductModel, 'update').resolves(1);
+      const response = await ProductService.update(1, "novo");
+      expect(response).to.be.deep.equal(false);
+    });
+
+    it('informando um "id" inválido', async () => {
+      sinon.stub(ProductModel, 'update').resolves(0);
+      const response = await ProductService.update(NaN, "teste");
+      expect(response).to.be.deep.equal(false);
+    });
+
+
+
+
+  });
+
+  describe('#delete', () => {
+
+    it('informando um "id" válido', async () => {
+      sinon.stub(ProductModel, 'delete').resolves(1);
+      const response = await ProductService.delete(1);
+      expect(response).to.be.deep.equal({ id: 1});
+    });
+
+    it('informando um "id" inválido', async () => {
+      sinon.stub(ProductModel, 'delete').resolves('teste');
+      const response = await ProductService.delete('teste');
+      expect(response).to.be.deep.equal(false);
+    });
+
+    it('informando um "id" inválido', async () => {
+      sinon.stub(ProductModel, 'delete').resolves(0);
+      const response = await ProductService.delete(NaN);
+      expect(response).to.be.deep.equal(false);
+    });
+
+
+  });
+
+
+
 });
