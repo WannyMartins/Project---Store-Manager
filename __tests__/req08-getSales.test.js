@@ -2,7 +2,7 @@ const { runSeed, connect } = require('./_utils');
 const frisby = require("frisby");
 require("dotenv").config();
 
-describe("08 - Crie endpoints para listar vendas", () => {
+describe.only("08 - Crie endpoints para listar vendas", () => {
   const url = `http://localhost:${process.env.PORT}`;
 
   beforeAll(async () => await runSeed());
@@ -48,6 +48,7 @@ describe("08 - Crie endpoints para listar vendas", () => {
   });
 
   it("Será validado que é possível listar uma venda específica com sucesso", async () => {
+    
     const { status, json } = await frisby.get(`${url}/sales/1`);
 
     expect(status).toBe(200);

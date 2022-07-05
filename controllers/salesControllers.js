@@ -1,19 +1,24 @@
-// const SalesServices = require('../services/salesServices');
+const SalesServices = require('../services/salesServices');
 
-// async function createSales(req, res) {
-//   const { quantity, product_id } = req.body;
+const jsonNotFound = { message: 'Sale not found' };
 
-//   // if (!name) return res.status(400).json({ message: '"name" is required' });
-//   // if (name.length < 5) {
-//   //   return res.status(422)
-//   //     .json({ message: '"name" length must be at least 5 characters long' });
-//   // }
+const SalesController = {
+  getAll: async (req, res) => {
+    const sales = await SalesServices.getAll();
 
-//   const result = await SalesServices.createSales(quantity, product_id);
+    if (sales.length === 0) return res.status(404).json(jsonNotFound);
 
-//   return res.status(201).json(result);
-// }
+    return res.status(200).json(sales);
+  },
 
-// module.exports = {
-//   createSales,
-// };
+  getById: async (req, res) => {
+    const { id } = req.params;
+    const sales = await SalesServices.getById(id);
+    if (!sales) return res.status(404).json(jsonNotFound);
+
+    return res.status(200).json(sales);
+  },
+
+};
+
+module.exports = SalesController;
