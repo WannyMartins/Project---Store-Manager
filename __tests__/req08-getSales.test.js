@@ -2,7 +2,7 @@ const { runSeed, connect } = require('./_utils');
 const frisby = require("frisby");
 require("dotenv").config();
 
-describe.only("08 - Crie endpoints para listar vendas", () => {
+describe("08 - Crie endpoints para listar vendas", () => {
   const url = `http://localhost:${process.env.PORT}`;
 
   beforeAll(async () => await runSeed());
