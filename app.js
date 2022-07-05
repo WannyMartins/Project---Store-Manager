@@ -12,6 +12,7 @@ app.get('/', (req, res) => {
 });
 
 app.delete('/products/:id', ProductsControllers.delete);
+app.delete('/sales/:id', SalesController.delete);
 app.put('/products/:id', ProductsControllers.update);
 app.get('/products/search', ProductsControllers.search);
 app.get('/products/:id', ProductsControllers.getById);

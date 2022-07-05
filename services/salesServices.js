@@ -12,6 +12,14 @@ const SalesServices = {
     return getSales;
   },
 
+  delete: async (id) => {
+    if (typeof id !== 'number' || id <= 0 || id === undefined) return false;
+
+    const sale = await SalesModels.delete(Number(id));
+    if (!sale) return false;
+    return { id };
+  },
+
 };
 
 module.exports = SalesServices;

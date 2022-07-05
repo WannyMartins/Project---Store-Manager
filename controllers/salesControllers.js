@@ -19,6 +19,19 @@ const SalesController = {
     return res.status(200).json(sales);
   },
 
+  delete: async (req, res) => {
+    const { id } = req.params;
+    if (!id) {
+      return res.status(404).json(jsonNotFound);
+    }
+    const sale = await SalesServices.delete(Number(id));
+    if (!sale) {
+      return res.status(404).json(jsonNotFound);
+    }
+
+    return res.sendStatus(204);
+  },
+
 };
 
 module.exports = SalesController;
