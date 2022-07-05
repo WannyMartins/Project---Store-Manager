@@ -44,7 +44,6 @@ describe('SalesServices', () => {
     });
   });
 
-
   describe('#getById', () => {
 
     describe('se o retorno não é vazio', () => {
@@ -73,6 +72,27 @@ describe('SalesServices', () => {
       });
     });
 
+  });
+
+  describe('#delete', () => {
+
+    it('informando um "id" válido', async () => {
+      sinon.stub(SalesModels, 'delete').resolves(1);
+      const response = await SalesServices.delete(1);
+      expect(response).to.be.deep.equal({ id: 1 });
+    });
+
+    it('informando um "id" inválido', async () => {
+      sinon.stub(SalesModels, 'delete').resolves('teste');
+      const response = await SalesServices.delete('teste');
+      expect(response).to.be.deep.equal(false);
+    });
+
+    it('informando um "id" inválido', async () => {
+      sinon.stub(SalesModels, 'delete').resolves(0);
+      const response = await SalesServices.delete(NaN);
+      expect(response).to.be.deep.equal(false);
+    });
   });
  });
 

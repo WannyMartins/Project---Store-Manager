@@ -52,5 +52,16 @@ describe('SalesModels', () => {
     });
 
   });
+
+  describe('#delete', () => {
+
+    it('retorna uma linha afetada', async () => {
+      sinon.stub(connection, "execute").resolves([{ affectedRows: 1 }]);
+      const response = await SalesModels.delete(1);
+
+      expect(response).to.be.equal(1);
+    });
+  });
+
 });
 

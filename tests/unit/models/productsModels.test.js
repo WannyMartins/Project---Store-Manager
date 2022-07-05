@@ -59,9 +59,7 @@ describe('ProductModel', () => {
     });
 
   });
-
-
-
+  
   describe('#create', () => {
 
       it('retorna um id', async () => {

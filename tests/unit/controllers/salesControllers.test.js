@@ -120,5 +120,67 @@ describe('SalesController', () => {
     });
   });
 
+  describe('#delete', () => {
+
+    describe('se informar o name e id válido', () => {
+      it('o status retorna correto', async () => {
+        const req = {};
+        const res = {};
+
+        res.sendStatus = sinon.stub().returns(res);
+        res.json = sinon.stub();
+
+        req.body = { name: 'teste' };
+        req.params = { id: 1 }
+
+        sinon.stub(SalesServices, 'delete').resolves(1);
+
+        await SalesController.delete(req, res);
+
+        expect(res.sendStatus.calledWith(204)).to.be.equal(true);
+      });
+
+    });
+
+    describe('se informar o id inválido', () => {
+      it('com id invalido o status retorna correto', async () => {
+        const req = {};
+        const res = {};
+
+        res.status = sinon.stub().returns(res);
+        res.json = sinon.stub();
+
+        req.body = { name: 'teste' };
+        req.params = { id: 'teste' }
+
+        sinon.stub(SalesServices, 'delete').resolves(false);
+
+        await SalesController.delete(req, res);
+
+        expect(res.status.calledWith(404)).to.be.equal(true);
+      });
+
+      it('com id vazio o status retorna correto', async () => {
+        const req = {};
+        const res = {};
+
+        res.status = sinon.stub().returns(res);
+        res.json = sinon.stub();
+
+        req.body = { name: 'teste' };
+        req.params = { id: '' }
+
+        sinon.stub(SalesServices, 'delete').resolves(false);
+
+        await SalesController.delete(req, res);
+
+        expect(res.status.calledWith(404)).to.be.equal(true);
+      });
+
+
+    });
+
+  });
+
       
   });
