@@ -1,3 +1,4 @@
+const ProductsServices = require('../services/productsServices');
 const SalesServices = require('../services/salesServices');
 
 const jsonNotFound = { message: 'Sale not found' };
@@ -17,6 +18,23 @@ const SalesController = {
     if (!sales) return res.status(404).json(jsonNotFound);
 
     return res.status(200).json(sales);
+  },
+
+  create: async (req, res) => {
+    await SalesServices.validateBody(req.body);
+    
+    const dados = req.body;
+    const product = dados.map(({ productId }) => productId);
+    await ProductsServices.getById(product);
+   await SalesServices.create(dados);
+    
+    const result = {
+      itemsSold: dados,
+    };
+
+    // if (sales.length === 0) return res.status(404).json(jsonNotFound);
+
+    return res.status(200).json(result);
   },
 
   delete: async (req, res) => {

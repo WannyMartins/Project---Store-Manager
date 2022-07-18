@@ -38,6 +38,31 @@ const SalesModels = {
     return affectedRows;
   },
 
+  createSale: async () => {
+    const query = 'INSERT INTO StoreManager.sales (date) VALUES (default)';
+    const [{ insertId }] = await connection.execute(query);
+
+    return insertId;
+  },
+
+  create: async (dados) => {
+    const query = `INSERT INTO  StoreManager.sales_products
+      (sale_id, product_id, quantity) VALUES ?;`;
+
+    const saleId = await SalesModels.createSale();
+
+    const result = dados.map(({ productId, quantity }) => [saleId, productId, quantity]);
+    console.log(result);
+
+    await connection.query(query, [result], true);
+  },
+
+  // edite: async (id, changes) => {
+  //   const query = 'UPDATE StoreManager.sales_products SET ? WHERE id = ?;';
+  //   const [{ affectedRows }] = await connection.execute(query, [changes, id]);
+  //   return affectedRows;
+  // },
+
 };
 
 module.exports = SalesModels;
