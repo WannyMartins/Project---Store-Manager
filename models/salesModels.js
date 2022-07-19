@@ -56,8 +56,8 @@ const SalesModels = {
 
   edite: async (id, productId, quantity) => {
     const query = `UPDATE StoreManager.sales_products 
-    SET product_id = ?, quantity = ? WHERE sale_id = ? ;`;
-    const [{ affectedRows }] = await connection.connection(query, [productId, quantity, id]);
+    SET quantity = ? WHERE sale_id = ? AND product_id = ? ;`;
+    const [{ affectedRows }] = await connection.query(query, [quantity, id, productId]);
     return affectedRows;
   },
 
