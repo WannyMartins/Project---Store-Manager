@@ -61,6 +61,14 @@ const SalesServices = {
   return map;
   },
 
+  edite: async (saleId, dados) => {
+    const result = await Promise.all(dados
+      .map((d) => SalesModels.edite(saleId, d.productId, d.quantity)));
+    console.log('🚀 ~ file: salesServices.js ~ line 67 ~ edite: ~ result', result);
+  
+    return { saleId, itemsUpdated: dados };
+  },
+
 };
 
 module.exports = SalesServices;

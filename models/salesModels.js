@@ -49,18 +49,17 @@ const SalesModels = {
     const query = `INSERT INTO  StoreManager.sales_products
       (sale_id, product_id, quantity) VALUES (?, ?, ?);`;
 
-    // const result = dados.map((saleId, productId, quantity) => [saleId, productId, quantity]);
-
     const resp = await connection.query(query, [saleId, dados.productId, dados.quantity]);
 
     return resp;
   },
 
-  // edite: async (id, changes) => {
-  //   const query = 'UPDATE StoreManager.sales_products SET ? WHERE id = ?;';
-  //   const [{ affectedRows }] = await connection.execute(query, [changes, id]);
-  //   return affectedRows;
-  // },
+  edite: async (id, productId, quantity) => {
+    const query = `UPDATE StoreManager.sales_products 
+    SET product_id = ?, quantity = ? WHERE sale_id = ? ;`;
+    const [{ affectedRows }] = await connection.connection(query, [productId, quantity, id]);
+    return affectedRows;
+  },
 
 };
 

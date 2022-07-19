@@ -15,7 +15,6 @@ app.get('/', (req, res) => {
 
 app.delete('/products/:id', rescue(ProductsControllers.delete));
 app.put('/products/:id', rescue(ProductsControllers.update));
-// app.put('/sales/:id', SalesController.edite);
 app.get('/products/search', rescue(ProductsControllers.search));
 app.get('/products/:id', rescue(ProductsControllers.getById));
 app.get('/products', rescue(ProductsControllers.getAll));
@@ -24,6 +23,7 @@ app.post('/products', rescue(ProductsControllers.create));
 app.delete('/sales/:id', rescue(SalesController.delete));
 app.get('/sales/:id', rescue(SalesController.getById));
 
+app.put('/sales/:id', rescue(SalesController.edite));
 app.get('/sales', rescue(SalesController.getAll));
 app.post('/sales', rescue(SalesController.create));
 

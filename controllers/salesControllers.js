@@ -37,6 +37,24 @@ const SalesController = {
     return res.status(201).json(result);
   },
 
+  edite: async (req, res) => {
+    const dados = req.body;
+    await SalesServices.validateBody(dados);
+    
+    const { id } = req.params;
+    const sale = await SalesServices.getById(id);
+    if (!sale) {
+      return res.status(404).json(jsonNotFound);
+    }
+    const product = dados.map(({ productId }) => productId);
+    const productExist = await SalesServices.checkProductExist(product);
+    const checkArray = productExist.some((prod) => prod.length === 0);
+    if (checkArray === true) return res.status(404).json({ message: 'Product not found' });
+    const updateServices = await SalesServices.edite(Number(id), dados);
+
+    return res.status(200).json(updateServices);
+  },
+
   delete: async (req, res) => {
     const { id } = req.params;
     if (!id) {
