@@ -1,8 +1,9 @@
 const express = require('express');
+const rescue = require('express-rescue');
 
 const ProductsControllers = require('./controllers/productsControllers');
 const SalesController = require('./controllers/salesControllers');
-const error = require('./middlewares/error');
+const middlewareError = require('./middlewares/error');
 
 const app = express();
 app.use(express.json());
@@ -12,21 +13,21 @@ app.get('/', (req, res) => {
   res.send();
 });
 
-app.delete('/products/:id', ProductsControllers.delete);
-app.delete('/sales/:id', SalesController.delete);
-app.put('/products/:id', ProductsControllers.update);
+app.delete('/products/:id', rescue(ProductsControllers.delete));
+app.put('/products/:id', rescue(ProductsControllers.update));
 // app.put('/sales/:id', SalesController.edite);
-app.get('/products/search', ProductsControllers.search);
-app.get('/products/:id', ProductsControllers.getById);
-app.get('/products', ProductsControllers.getAll);
-app.get('/sales/:id', SalesController.getById);
-app.post('/sales', SalesController.create);
+app.get('/products/search', rescue(ProductsControllers.search));
+app.get('/products/:id', rescue(ProductsControllers.getById));
+app.get('/products', rescue(ProductsControllers.getAll));
+app.post('/products', rescue(ProductsControllers.create));
 
-app.get('/sales', SalesController.getAll);
+app.delete('/sales/:id', rescue(SalesController.delete));
+app.get('/sales/:id', rescue(SalesController.getById));
 
-app.post('/products', ProductsControllers.create);
+app.get('/sales', rescue(SalesController.getAll));
+app.post('/sales', rescue(SalesController.create));
 
-app.use(error);
+app.use(middlewareError);
 // não remova essa exportação, é para o avaliador funcionar
 // você pode registrar suas rotas normalmente, como o exemplo acima
 // você deve usar o arquivo index.js para executar sua aplicação 

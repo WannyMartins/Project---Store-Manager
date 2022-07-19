@@ -45,16 +45,15 @@ const SalesModels = {
     return insertId;
   },
 
-  create: async (dados) => {
+  create: async (saleId, dados) => {
     const query = `INSERT INTO  StoreManager.sales_products
-      (sale_id, product_id, quantity) VALUES ?;`;
+      (sale_id, product_id, quantity) VALUES (?, ?, ?);`;
 
-    const saleId = await SalesModels.createSale();
+    // const result = dados.map((saleId, productId, quantity) => [saleId, productId, quantity]);
 
-    const result = dados.map(({ productId, quantity }) => [saleId, productId, quantity]);
-    console.log(result);
+    const resp = await connection.query(query, [saleId, dados.productId, dados.quantity]);
 
-    await connection.query(query, [result], true);
+    return resp;
   },
 
   // edite: async (id, changes) => {
